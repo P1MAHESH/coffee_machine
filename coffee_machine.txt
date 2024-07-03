@@ -1,0 +1,83 @@
+# this is the basic coffee machine program
+
+#first go to menu and then run this
+
+%run menu.ipynb
+print(f"Before order resources are {resources}")
+def espress():
+    if resources["water"]>=MENU["espresso"]["ingredients"]["water"] and resources["coffee"]>=MENU["espresso"]["ingredients"]["coffee"]:
+        resources["water"]-=MENU["espresso"]["ingredients"]["water"]
+        resources["coffee"]-=MENU["espresso"]["ingredients"]["coffee"]
+        print("\n\nHere is  your espresso.\n\n")
+    else:
+        print(f"\n\nsorry i am running shortage of  ingredients to make your drink and returning ur money {total_amount}\n\n")
+def latters():
+    if resources["water"]>=MENU["latte"]["ingredients"]["water"] and resources["milk"]>=MENU["latte"]["ingredients"]["milk"] and resources["coffee"]>=MENU["latte"]["ingredients"]["coffee"]:
+        resources["water"]-=MENU["latte"]["ingredients"]["water"]
+        resources["milk"]-=MENU["latte"]["ingredients"]["milk"]
+        resources["coffee"]-=MENU["latte"]["ingredients"]["coffee"]
+        print("\n\nHere is your latte.\n\n")
+    else:
+        print(f"\n\nsorry i am running shortage of  ingredients to make your drink and returning your amount {total_amount}\n\n")
+def capp():
+    if resources["water"]>=MENU["cappuccino"]["ingredients"]["water"] and resources["milk"]>=MENU["cappuccino"]["ingredients"]["milk"] and resources["coffee"]>=MENU["cappuccino"]["ingredients"]["coffee"]:
+        resources["water"]-=MENU["cappuccino"]["ingredients"]["water"]
+        resources["milk"]-=MENU["cappuccino"]["ingredients"]["milk"]
+        resources["coffee"]-=MENU["cappuccino"]["ingredients"]["coffee"]
+        print("\n\nHere is your cappuccino.\n\n")
+    else:
+        print(f"\n\nsorry i am running shortage of  ingredients to make your drink and returning your cash {total_amount}\n\n")
+def close_it():
+    print("U have turned off the coffee machine")
+ def coins(money):
+    global total_amount
+    print("Insert coins ? ")
+    s=int(input("How many quaters ? "))
+    d=int(input("How many dimes ? "))
+    f=int(input("How many nickles ? "))
+    p=int(input("How many pennis ? "))
+    total_amount=s*0.25+d*0.10+f*0.05+p*0.01
+    if total_amount>money:
+        diff=total_amount-money
+        print("\n\nI am just calculating the bill before dispencing the product and money balnce will be given ,if i have sufficient ingredients to make your product else total money will be refunded to you\n\n")
+        print(f"\n\nYou have inserted {total_amount} and  actual is  cost is {money} , so balance is {diff}\n\n")
+        if inputs=='espresso':
+            espress()
+        elif inputs=='latte':
+            latters()
+        elif inputs=='cappuccino':
+            capp()
+    elif total_amount<money:
+        print("\n\nYou have not inserted the enough money\n\n")
+    elif total_amount==money:
+        if inputs=='espresso':
+            espress()
+        elif inputs=='latte':
+            latters()
+        elif inputs=='cappuccino':
+            capp()
+        print(f"\n\nActual cost is {money} and u have inserted {total_amount} so no balance remaining\n\n")
+    else:
+        print("Not correct")
+def resour():
+    print(f"{resources}")
+while True:
+    inputs=input("What would you like?\nespresso\nlatte\ncappuccino\noff(to turn_off the coffee machine\n report to see quantity left in machine)").lower()
+    if inputs=='latte':
+        sa=MENU["latte"]["cost"]
+        coins(sa)
+    elif inputs=='espresso':
+        we=MENU["espresso"]["cost"]
+        coins(we)
+        print(f"After espresso  resources are {resources}")
+    elif inputs=='cappuccino':
+        qr=MENU["cappuccino"]["cost"]
+        coins(qr)
+        print(f"after cappuccino resources are  {resources}")
+    elif inputs=='report' or inputs=='reports':
+        resour()
+    elif inputs=='off':
+        close_it()
+        break
+    else:
+        print("Sorry u have done a type mistake ")
