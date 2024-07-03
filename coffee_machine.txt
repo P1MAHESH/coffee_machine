@@ -29,7 +29,7 @@ def capp():
         print(f"\n\nsorry i am running shortage of  ingredients to make your drink and returning your cash {total_amount}\n\n")
 def close_it():
     print("U have turned off the coffee machine")
- def coins(money):
+def coins(money):
     global total_amount
     print("Insert coins ? ")
     s=int(input("How many quaters ? "))
